@@ -7,6 +7,7 @@ import Loading from './components/Loding';
 import './App.css';
 import  Register  from './components/Register';
 import  Login from './components/Login';
+import Alert from './components/Alert';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
    <Navbar />
   <Route exact path='/' component={Loading} />
   <section className='container'>
+  <Alert/>
 <Switch>
 <Route exact path='/register' component={Register}/>
 <Route exact path='/login' component={Login}/>

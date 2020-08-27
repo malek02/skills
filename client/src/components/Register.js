@@ -1,7 +1,11 @@
 import React, {useState} from 'react'
 import axios from 'axios';
-import {Link} from 'react-router-dom'
- const Register = () => {
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {setCurrentUser} from '../action/action';
+
+
+ const Register = (props) => {
 
 const [ formData , setFormData ] = useState(
     { 
@@ -23,7 +27,7 @@ const handelSabmit=async (e)=>{
     e.preventDefault();
    if(password!== confirmpassword)
    {
-       alert('password not match')
+      props.setCurrentUser('password not match','danger')
    }
     else{
         const newUser={
@@ -52,8 +56,9 @@ console.error(err.response.data)
 
 }
     return (
-    
+        
         <section className="container">
+
       <h1 className="large text-primary">Sign Up</h1>
       <p className="lead"><i className="fas fa-user"></i> Create Your Account</p>
       <form className="form" onSubmit={e=>handelSabmit(e)}>
@@ -105,4 +110,8 @@ console.error(err.response.data)
         
     )
 }
-export default Register;
+const mapdispatchToProps = dispatch => ({
+    setCurrentUser: (user,alerttyp) => dispatch(setCurrentUser(user,alerttyp))
+  })
+
+export default connect (null, mapdispatchToProps)(Register);
