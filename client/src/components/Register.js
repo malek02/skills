@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
-import axios from 'axios';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {setCurrentUser} from '../action/action';
+import {setRegister} from '../action/auth'
 
 
  const Register = (props) => {
@@ -29,32 +29,10 @@ const handelSabmit=async (e)=>{
    {
       props.setCurrentUser('password not match','danger')
    }
-    else{
-        const newUser={
-            name:name,
-            email:email,
-            password:password
-        };
+        else{props.setRegister({name,email,password})}                                        
+            
         
-
-        const head={
-            headers:{
-                'Content-Type':'application/json'
-            }
-        };
-        const body=JSON.stringify(newUser)
-        console.log('body',body)
-        try{
-
-const res= await axios.post('/api/users',body, head)
-console.log(res.data)
-        }
-        catch(err){
-console.error(err.response.data)
-        }
     }
-
-}
     return (
         
         <section className="container">
@@ -68,7 +46,7 @@ console.error(err.response.data)
           value={name} 
           onChange={e=>holdChange(e)}
           name="name" 
-          required />
+         />
         </div>
         <div className="form-group">
           <input type="email" 
@@ -86,7 +64,7 @@ console.error(err.response.data)
             name="password"
             value={password}
             onChange={e=>holdChange(e)}
-            minLength="6"
+            
           />
         </div>
         <div className="form-group">
@@ -95,7 +73,7 @@ console.error(err.response.data)
             placeholder="Confirm Password"
             name="confirmpassword"
             value={confirmpassword}
-            minLength="6"
+            
             onChange={e=>holdChange(e)}
           />
         </div>
@@ -111,7 +89,8 @@ console.error(err.response.data)
     )
 }
 const mapdispatchToProps = dispatch => ({
-    setCurrentUser: (user,alerttyp) => dispatch(setCurrentUser(user,alerttyp))
+    setCurrentUser: (user,alerttyp) => dispatch(setCurrentUser(user,alerttyp)),
+    setRegister:({name,email,password})=>dispatch(setRegister({name,email,password}))
   })
 
 export default connect (null, mapdispatchToProps)(Register);
