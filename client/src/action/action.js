@@ -12,5 +12,5 @@ dispatch({
 setTimeout(()=>dispatch({
     type: 'SET_CURRENT_ALERT',
     payload: uuidv4()
-}),3000)
+}),7000)
 }

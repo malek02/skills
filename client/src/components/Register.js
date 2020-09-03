@@ -29,7 +29,10 @@ const handelSabmit=async (e)=>{
    {
       props.setCurrentUser('password not match','danger')
    }
-        else{props.setRegister({name,email,password})}                                        
+        else{
+          props.setRegister({name,email,password})
+       
+        }                                        
             
         
     }
