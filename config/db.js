@@ -1,12 +1,12 @@
 const mongoose= require('mongoose');
 const config = require('config');
 const db = config.get('URI');
-console.log(db)
+
 
 const connectDB = async ()=> {
     try{
         
-        await mongoose.connect(db, {useNewUrlParser: true,useUnifiedTopology: true })
+        await mongoose.connect(db, {useFindAndModify:false,useCreateIndex:true,useNewUrlParser: true,useUnifiedTopology: true })
         console.log("work goood......");
     }
     catch(err){
