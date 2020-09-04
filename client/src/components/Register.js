@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {setCurrentUser} from '../action/action';
 import {setRegister} from '../action/auth'
@@ -33,8 +33,13 @@ const handelSabmit=async (e)=>{
           props.setRegister({name,email,password})
        
         }                                        
-            
+       
         
+    }
+    if(props.isAuthenticated){
+      console.log(8888888,props.isAuthenticated)
+      return <Redirect to='/' /> 
+      
     }
     return (
         
@@ -91,9 +96,12 @@ const handelSabmit=async (e)=>{
         
     )
 }
+const mapToProps=state=>({
+  isAuthenticated: state.auThentication.isAuthenticated
+})
 const mapdispatchToProps = dispatch => ({
     setCurrentUser: (user,alerttyp) => dispatch(setCurrentUser(user,alerttyp)),
     setRegister:({name,email,password})=>dispatch(setRegister({name,email,password}))
   })
 
-export default connect (null, mapdispatchToProps)(Register);
+export default connect (mapToProps, mapdispatchToProps)(Register);

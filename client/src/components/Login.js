@@ -1,48 +1,35 @@
 import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
+import {login} from '../action/auth'
+import {connect} from 'react-redux';
 
-
- const Login = () => {
+ const Login = (props) => {
     const [ formData , setFormData ] = useState(
-        { 
-            name:'',
+        {            
             email:'',
-            password:'',
-            confirmpassword:''
+            password:''          
         })
     
     
-    const {name,email,password,confirmpassword}=formData
+    const {email,password}=formData
     
     const holdChange=async (e)=>{
         const {name , value}=e.target
         setFormData({...formData,[name]:value})
         console.log(formData)
     }
-    const handelSabmit=async (e)=>{
+    const handelSabmit=(e)=>{
         e.preventDefault();
-       if(password!== confirmpassword)
-       {
-           alert('password not match')
-       }
-        else{
-            const newUser={
-                name:name,
-                email:email,
-                password:password
-            };
+         props.login (email,password)
+          }
+          if(props.isAuthenticated){
+            return <Redirect to='/' /> 
             
-            const body=JSON.stringify(newUser)
-            console.log('body',body)
-            }
-           
-          
-    
-        }
-
-
+          }
     return (
+     
         <section className="container">
+        
       <h1 className="large text-primary">Sign In</h1>
       
       <form className="form" onSubmit={e=>handelSabmit(e)}>
@@ -75,4 +62,7 @@ import {Link} from 'react-router-dom';
     </section>
     )
 }
-export default Login;
+const mapdToProps = state => ({
+  isAuthenticated: state.auThentication.isAuthenticated
+})
+export default connect(mapdToProps,{login})(Login);
