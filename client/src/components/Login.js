@@ -7,39 +7,76 @@ import {connect} from 'react-redux';
     const [ formData , setFormData ] = useState(
         {            
             email:'',
-            password:''          
+            password:'',    
+            emailError:null,
+            passwordError:null
+
         })
-    
+        console.log(1212121212,localStorage.token)
     
     const {email,password}=formData
     
     const holdChange=async (e)=>{
         const {name , value}=e.target
         setFormData({...formData,[name]:value})
-        console.log(formData)
+      
     }
     const handelSabmit=(e)=>{
         e.preventDefault();
-         props.login (email,password)
-          }
+        const must=validation()
+        if (!must)
+         {props.login (email,password)
+         setFormData(
+          {            
+              email:'',
+              password:''          
+          })}
+          setTimeout(() => {setFormData(
+            {            
+               
+              passwordError:null        
+            })
+            
+          }, 4000);
+         
+        }
           if(props.isAuthenticated){
-            return <Redirect to='/' /> 
+            return <Redirect to='/Dashboard' /> 
             
           }
+        const validation=()=>{
+let emaillerror ='';
+
+if(formData.password.length<6){
+  let passworderror='your password must have more than 6 caracter'
+  setFormData({passwordError:passworderror})
+  return true
+}
+
+
+else{return false}
+
+         }
     return (
      
         <section className="container">
+        { formData.passwordError ?
+        <div className='alert alert-danger'>
+            {formData.passwordError}
+          </div> : ''}
         
       <h1 className="large text-primary">Sign In</h1>
       
       <form className="form" onSubmit={e=>handelSabmit(e)}>
         
         <div className="form-group">
+       
           <input type="email" 
           placeholder="Email Address" 
           value={email} 
           onChange={e=>holdChange(e)}
           name="email" />
+          
           
           
         </div>
@@ -50,8 +87,7 @@ import {connect} from 'react-redux';
             name="password"
             value={password}
             onChange={e=>holdChange(e)}
-            minLength="6"
-          />
+           />
         </div>
         
         <input type="submit"  className="btn btn-primary" value="Login"  />

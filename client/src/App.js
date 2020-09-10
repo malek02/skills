@@ -6,23 +6,29 @@ import Navbar from './components/Navbar';
 import Loading from './components/Loding';
 import './App.css';
 import  Register  from './components/Register';
+import Dashboard from './components/dashboard/dashboard'
 import  Login from './components/Login';
 import Alert from './components/Alert';
 import {loadUser} from './action/auth';
 import setAuthtoken from './reducers/utils/setAuthToken';
-
-const  App=()=> {
+import CreatProfile from './components/Creat-Profile/CreatProfile';
+import EditProfile from './components/Creat-Profile/EditProfile'
+import PrivateRouter from './components/router/PrivateRouter';
+import AddExperience from './components/Creat-Profile/AddExperience';
+import AddEducation from './components/Creat-Profile/AddEducation'
+const  App=(props)=> {
 if(localStorage.token){
   setAuthtoken(localStorage.token)
 }
 
 
+
 useEffect(()=>{
   store.dispatch(loadUser())
-},[])
-
+},[]);
 
   return (
+    
     <Provider store={store}>
     <Router>
     <div>
@@ -34,6 +40,11 @@ useEffect(()=>{
 <Switch>
 <Route exact path='/register' component={Register}/>
 <Route exact path='/login' component={Login}/>
+<PrivateRouter  exact path='/Dashboard' component={Dashboard} />
+<PrivateRouter exact path='/createprofile' component={CreatProfile} />
+<PrivateRouter exact path='/editprofile' component={EditProfile} />
+<PrivateRouter exact path='/addexperience' component={AddExperience} />
+<PrivateRouter exact path='/addeducation' component={AddEducation} />
 </Switch>
   </section>
     </div>

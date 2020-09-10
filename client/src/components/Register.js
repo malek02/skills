@@ -37,8 +37,8 @@ const handelSabmit=async (e)=>{
         
     }
     if(props.isAuthenticated){
-      console.log(8888888,props.isAuthenticated)
-      return <Redirect to='/' /> 
+     
+      return <Redirect to='/Dashboard' /> 
       
     }
     return (
@@ -50,7 +50,7 @@ const handelSabmit=async (e)=>{
       <form className="form" onSubmit={e=>handelSabmit(e)}>
         <div className="form-group">
           <input type="text" 
-          placeholder="Name" 
+          placeholder="first name and last name" 
           value={name} 
           onChange={e=>holdChange(e)}
           name="name" 

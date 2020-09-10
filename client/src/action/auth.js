@@ -53,9 +53,9 @@ try{
     });}
     catch(err){
         const errors= err.response.data.errors;
-console.log(err.response)
+
         if(errors){
-            errors.forEach(element => dispatch(setCurrentUser(element.msg,'danger')))
+            errors.forEach(element => dispatch(setCurrentUser(element.message,'danger')))
                 
             };
        
@@ -109,3 +109,12 @@ console.log(err.response)
         }
         
         }
+export  const logout = () =>dispatch=>{
+
+
+            dispatch({
+                type: 'LOGOUT_NAVBAR',
+                
+            })
+
+          }

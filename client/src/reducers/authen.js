@@ -32,8 +32,10 @@ case 'USER_LOADED':
             case Useractiontypes.REGISTER_FAIL:
                 case 'AUTH_ERROR':
                     case'LOGIN_FAIL':
+                    case'LOGOUT_NAVBAR':
+                   
                 localStorage.removeItem('token');
-                return {...state,token:null,isAthenticated:false,loading:false};
+                return {...state,token:null,isAuthenticated:false,loading:true,user:null};
                 
         default:
             return state;

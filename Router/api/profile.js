@@ -50,7 +50,7 @@ const {
     profileFields.social ={}
     if (linkedin) profileFields.social.linkedin=linkedin;
     if (twitter) profileFields.social.twitter=twitter;
-    if (twitter) profileFields.social.facebook=facebook;
+    if (facebook) profileFields.social.facebook=facebook;
     if (instagram) profileFields.social.instagram=instagram;
 
     try{

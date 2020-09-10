@@ -3,13 +3,14 @@ const connectDB = require('./config/db');
 const app = express();
 
 
+
 connectDB();
 
 app.use(express.json({extended: false}));
 
 const PORT = process.env.PORT || 5000;
 app.get('/',(req,res)=>{
-    console.log('ffff',req.body);
+    
     res.send('HELOO FROM FFFSERVER')})
 
 app.use('/api/users', require('./router/api/users'));
