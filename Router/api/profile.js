@@ -37,7 +37,7 @@ const {
     company,website,location,bio,status,githubusername,skills,facebook,
     twitter,instagram,linkedin} = req.body;
     const profileFields ={};
-    profileFields.user=req.user.id;
+    profileFields.user=req.user.id
     if (company) profileFields.company=company;
     if (website) profileFields.website=website;
     if (location) profileFields.location=location;
@@ -101,12 +101,12 @@ router.delete('/', auth,async (req, res)=>{
         // remove users posts
 
         //remove profile
-        await profile.findOneAndRemove({user:req.user.id})
+        await Profile.findOneAndRemove({user:req.user.id})
 
         //remove user
-        await user.findOneAndRemove({_id:req.user.id})
         
-        res.json({msg:'user deleted '})
+        
+        res.json({msg:'Profile user deleted '})
     }catch(err){
         console.error(err.message)
         

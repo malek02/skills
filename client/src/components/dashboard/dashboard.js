@@ -5,16 +5,16 @@ import {Link} from 'react-router-dom';
 import Spinner  from '../router/Spinner';
 import ExperienceProfile from './ExperienceProfile';
 import EuducationProfile from './EducationProfile';
-
-
-const Dashboard = ({ getCurrentProfile, user,profile,loading }) => {
+import {DeletProfile} from '../../action/profile'
+import {GetProfiles} from '../../action/profile'
+const Dashboard = ({GetProfiles, DeletProfile,getCurrentProfile, user,profile,loading }) => {
   useEffect(() => {
-    getCurrentProfile();
+    getCurrentProfile();GetProfiles()
   }, []);
  
   return (
     <>
-{ !profile &&  !loading? <Spinner/> :
+{ !user ? <Spinner/> :
 
     <div>
       <h1 className="large text-primary">Dashboard</h1>
@@ -40,6 +40,8 @@ const Dashboard = ({ getCurrentProfile, user,profile,loading }) => {
       <Fragment>
 <ExperienceProfile experience={profile.experience} />
 <EuducationProfile education={profile.education} />
+<button className='btn btn-danger my-3' onClick={e=>DeletProfile(e)} > 
+<i className="fas fa-user-circle text-secondary"/>{'    '} delete your profile</button>
     </Fragment>
       </>
       :
@@ -57,4 +59,4 @@ const mapToProps = (state) => ({
   profile:state.CurrentProfile.profile,
   loading: state.auThentication.loading
 });
-export default connect(mapToProps,{getCurrentProfile})(Dashboard);
+export default connect(mapToProps,{GetProfiles,getCurrentProfile,DeletProfile})(Dashboard);

@@ -45,7 +45,7 @@ export  const setRegister = ({name,email,password}) =>async dispatch=>{
 try{
     
     const res= await axios.post('/api/users',body, head)
-    console.log(1,res)
+   
     dispatch({    
         type: 'REGISTER_SUCCESS',
         payload: res.data,
@@ -105,7 +105,7 @@ try{
                 type: 'LOGIN_FAIL'
                 
             })
-            dispatch(loadUser())
+          
         }
         
         }

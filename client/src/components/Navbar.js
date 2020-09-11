@@ -2,12 +2,12 @@ import React from 'react'
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {logout} from '../action/auth';
-
+import {BsFillGridFill,BsUnion} from 'react-icons/bs'
 
 const Navbar=(props)=> {
 const autLink=(
   <>
-         <li><Link to="/">Developers</Link></li>
+        
           <li><Link to="/register">Register</Link></li>
           <li><Link to="/login">Login</Link></li> 
           </>
@@ -34,11 +34,18 @@ const unauthLink=(
     return (
         <nav className="navbar bg-dark">
         <h1>
-
+        
           
-          <Link to="/"><i className="fas fa-code"></i> DevConnector</Link>
+          <Link to="/"><BsFillGridFill /> FindSkills</Link>
         </h1>
         <ul>
+        <li>
+         
+        <Link to="/profiles">
+           <BsUnion/>{' '}
+           <span className='hide-sm'>Skills</span>
+         </Link>
+                  </li> 
          { !props.loading && props.isAuthenticated ?
           unauthLink
          :
