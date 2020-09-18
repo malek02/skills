@@ -71,6 +71,7 @@ if(!post){
        
        await post.remove()
         res.json({msg:'post deleted '})
+        
     }catch(err){
         console.error(err.message)
         
@@ -97,13 +98,18 @@ router.put('/like/:id',auth,async (req,res)=>{
 router.put('/unlike/:id',auth,async (req,res)=>{
     try {
         const post= await Post.findById(req.params.id);
-        console.log(999,post.likes);
-
+        console.log(1,post.likes)
+        console.log(2,req.user.id)
+        console.log(3,post.likes.map(item=>item.user.toString()))
+        console.log(4,post.likes.map(item=>item.user.toString())
+        .indexOf(req.user.id))
+        console.log(1,)
         if(post.likes.filter(like=>like.user.toString()=== req.user.id).length === 0){
             return res.status(400).json({msg:'Post has been not liked'})
         }
-        const removeIndex = post.likes.map(item=>item._id)
-        .indexOf(req.params.id);
+        const removeIndex = post.likes.map(item=>item.user.toString()).indexOf(req.user.id);
+        
+        
         post.likes.splice(removeIndex,1)
         
         await post.save();
@@ -141,7 +147,7 @@ router.post('/comment/:id',
 
    post.comments.unshift(newComment);
      await post.save();
-     res.json(post)
+     res.json(post.comments)
 } catch (err) {
     console.error(err.message)
         

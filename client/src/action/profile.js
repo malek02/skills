@@ -37,7 +37,7 @@ export const creatProfile = (form, history, edit: false) => async (
     });
 
     dispatch(
-      setCurrentUser(edit ? "profile update" : "profile created", "success")
+      setCurrentUser(edit ? "profile update" : "profile update", "success")
     );
     if (!edit) {
       history.push("/Dashboard");
@@ -206,6 +206,8 @@ export const DeletProfile = () => async (dispatch) => {
   }
 };
 export const GetProfiles = () => async (dispatch) => {
+
+  dispatch({type: "CLEAR_PROFILE"})
   try {
     const res = await axios.get("/api/profile");
     console.log("get profiles", res.data);
@@ -223,15 +225,28 @@ export const GetProfiles = () => async (dispatch) => {
     });
   }
 };
-export const GetProfilByid=()=>{
+
+export const GetProfilByid=(id)=> async dispatch=>{
+
+  dispatch({type: "CLEAR_PROFILE"})
+
 try {
     
+const res = await axios.get(`/api/profile/user/${id}`);
+    console.log("get profileby id", res.data);
 
+    dispatch({
+      type: "GET_PROFILE_BYID",
+      payload: res.data,
+    });
 
 
     
-} catch (error) {
-    
+} catch (err) {
+  dispatch({
+    type: "GET_PROFILE_BYID_FAIL",
+    payload: { msg: err.response.statusText, status: err.response.status },
+  });
 }
 
 

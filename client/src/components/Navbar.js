@@ -1,10 +1,11 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
-import {connect} from 'react-redux';
+import {connect,useSelector} from 'react-redux';
 import {logout} from '../action/auth';
-import {BsFillGridFill,BsUnion} from 'react-icons/bs'
+import {BsFillGridFill,BsUnion ,BsReverseLayoutTextSidebarReverse} from 'react-icons/bs'
 
 const Navbar=(props)=> {
+  
 const autLink=(
   <>
         
@@ -15,12 +16,19 @@ const autLink=(
 const unauthLink=(
   <>
   <li>
+           <Link to="/posts">
+           <BsReverseLayoutTextSidebarReverse/>{' '}
+           <span className='hide-sm'>Posts</span>
+         </Link>
+         </li>
+  <li>
          
          <Link to="/Dashboard">
     <i className='fas fa-user' />{' '}
-    <span className='hide-sm'>Dashbord</span>
+    <span className='hide-sm'>{props.user ? props.user.name:"" }</span>
     </Link>
            </li>
+           
   <li>
          
   <a onClick={e=>props.logout(e)} href='#!'>
@@ -37,15 +45,17 @@ const unauthLink=(
         
           
           <Link to="/"><BsFillGridFill /> FindSkills</Link>
+          
         </h1>
         <ul>
-        <li>
-         
+      
+         <li>
         <Link to="/profiles">
            <BsUnion/>{' '}
            <span className='hide-sm'>Skills</span>
          </Link>
                   </li> 
+        
          { !props.loading && props.isAuthenticated ?
           unauthLink
          :
@@ -56,6 +66,7 @@ const unauthLink=(
 }
 const mapdispatchProps=state=>({
   isAuthenticated: state.auThentication.isAuthenticated,
-  loading: state.auThentication.loading
+  loading: state.auThentication.loading,
+  user:state.auThentication.user
 })
 export default connect(mapdispatchProps,{logout})(Navbar);

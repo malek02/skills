@@ -22,14 +22,14 @@ const [ form, setForm]=useState({
 const handelChange=(e)=>{
     const {value,name}=e.target;
     setForm({...form,[name]:value})
-    console.log(1234,form)
+    
 }
 const openLinks=()=>{
     setOpen(!open)
 }
 const handelSubmit=(e)=>{
     e.preventDefault();
-   creatProfile(form,history,true)
+   creatProfile(form,history)
 }
 useEffect(
     ()=>{
@@ -43,10 +43,12 @@ bio:profile.bio ? profile.bio: '',
 status:profile.status ? profile.status: '',
 githubusername:profile.githubusername ? profile.githubusername : '' ,
 skills:profile.skills ? profile.skills.join(',') : '' ,
-facebook:profile.facebook ? profile.facebook : '',
-twitter:profile.twitter ? profile.twitter :'',
-instagram:profile.instagram ?profile.instagram : '',
-linkedin:profile.linkedin ?profile.linkedin:''
+
+facebook:profile.social ? profile.social.facebook : '',
+twitter:profile.social ? profile.social.twitter :'',
+instagram:profile.social ?profile.social.instagram : '',
+linkedin:profile.social ?profile.social.linkedin:''
+
 })
     }, [])
     return (

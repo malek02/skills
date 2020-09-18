@@ -16,7 +16,12 @@ import EditProfile from './components/Creat-Profile/EditProfile'
 import PrivateRouter from './components/router/PrivateRouter';
 import AddExperience from './components/Creat-Profile/AddExperience';
 import AddEducation from './components/Creat-Profile/AddEducation';
-import Profiles from './components/dashProfiels/Profiles'
+import Profiles from './components/dashProfiels/Profiles';
+import ProfileById from './components/dashProfiels/ProfileById';
+import Posts from './components/creat-Posts/Posts';
+import CostComment from './components/creat-Posts/post';
+import Notfound from './components/router/Notfound'
+
 const  App=(props)=> {
 if(localStorage.token){
   setAuthtoken(localStorage.token)
@@ -42,11 +47,16 @@ useEffect(()=>{
 <Route exact path='/register' component={Register}/>
 <Route exact path='/login' component={Login}/>
 <Route exact path='/profiles' component={Profiles}/>
-<PrivateRouter  exact path='/Dashboard' component={Dashboard} />
+<Route exact path='/profile/:_id' component={ProfileById}/>
+
+<PrivateRouter   exact path='/api/:_id' component={CostComment}/>
+<PrivateRouter  exact path='/posts' component={Posts} />
 <PrivateRouter exact path='/createprofile' component={CreatProfile} />
 <PrivateRouter exact path='/editprofile' component={EditProfile} />
 <PrivateRouter exact path='/addexperience' component={AddExperience} />
 <PrivateRouter exact path='/addeducation' component={AddEducation} />
+<PrivateRouter  exact path='/Dashboard' component={Dashboard} />
+<Route  component={Notfound}/>
 </Switch>
   </section>
     </div>

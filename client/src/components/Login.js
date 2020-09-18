@@ -39,13 +39,10 @@ const Login = (props) => {
   }
   const validation = () => {
     if (!formData.password) {
-      console.log(1,formData.password == null);
       let passworderror = "write your valid password";
       setFormData({ passwordError: passworderror });
       return true;
     } else {
-      console.log(12,formData.password == null)
-      console.log(2);
       if (formData.password.length < 6) {
         let passworderror = "your password must have more than 6 caracter";
         setFormData({ passwordError: passworderror });

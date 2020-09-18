@@ -45,6 +45,10 @@ const CurrentProfile = (state = INITIAL_STATE, action) => {
       return { ...state, profiles: action.payload };
     case "DELETE_PROFILE_ERROR":
       return { ...state, error: action.payload, loading: true };
+      case "GET_PROFILE_BYID":
+      return { ...state, profile: action.payload };
+      case "GET_PROFILE_BYID_FAIL":
+        return { ...state, error: action.payload, loading: true };
     default:
       return state;
   }

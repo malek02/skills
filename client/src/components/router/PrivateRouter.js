@@ -1,25 +1,36 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import {Route, Redirect } from 'react-router-dom';
-import {connect} from 'react-redux';
+import {connect,useSelector} from 'react-redux';
 
 
- const PrivateRouter=({component:Component,isAuthenticated,...otherprops})=>(
-<>
+ const PrivateRouter=({component:Component,...otherprops})=>{
     
-<Route {...otherprops} render={() => isAuthenticated ? (
+   
+   
+   
+      const isAuthenticated= useSelector(state=>state.auThentication.isAuthenticated)
+      const loading= useSelector(state=>state.auThentication.loading)
+      
+   
+  
+   
+   
+   return(
+   
+   
+<>
+<Route {...otherprops} render={() => isAuthenticated && !loading ? (
         <Component {...otherprops}  />) : (<Redirect to='/login'/>)}
 
     />
     </>
  )
+}
 
 
 
- 
     
  
- const mapToProps=state=>({
-    isAuthenticated: state.auThentication.isAuthenticated
-  })
+ 
 
- export default connect(mapToProps)(PrivateRouter) ;
+ export default connect()(PrivateRouter) ;

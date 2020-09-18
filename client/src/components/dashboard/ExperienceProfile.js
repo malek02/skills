@@ -10,7 +10,7 @@ experience.map(item=>(
         <td className='hide-sm'>{item.company}</td>
         <td className='hide-sm'>{item.title}</td>
         <td>
-<Moment forma='YYYY/MM/DD'>{item.from}</Moment>
+<Moment format='YYYY/MM/DD'>{item.from}</Moment>
 </td>
 <td>
 {item.to === null ? ('Now') :
